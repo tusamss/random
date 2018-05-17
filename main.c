@@ -5,12 +5,14 @@
 void randum (void);
 void bubble (void);
 
-int A[5];
+int ANS[5];
 
 int main (void)
 {
+	printf("五個10~50不重複亂數:");
 	randum();
 	printf("\n");
+	printf("由小到大排序後:");
 	bubble();
 	return 0;
 } 
@@ -20,42 +22,41 @@ void randum (void)
 	int check=0;
 	int i,j;
 	srand(time(NULL));
-	A[0]=(rand()%41)+10;
+	ANS[0]=(rand()%41)+10;
 	for( i =1;i<=4;i++)
 	{
-		A[i]=(rand()%41)+10;
+		check=0;
+		ANS[i]=(rand()%41)+10;
+		for(check=0;check<i;check++)
+		{
+			if(ANS[i]==ANS[check])
+			{
+				ANS[i]=(rand()%41)+10;
+				check=-1;
+			}
+		}
 	}
-	while((A[1]==A[0]))
-		A[1]=(rand()%41)+10;
-	while(((A[2]==A[0])||(A[2]==A[1])))
-		A[2]=(rand()%41)+10;
-	while(((A[3]==A[0])||(A[3]==A[1])||(A[3]==A[2])))
-		A[3]=(rand()%41)+10;
-	while(((A[4]==A[0])||(A[4]==A[1])||(A[4]==A[2])||(A[4]==A[3])))
-		A[4]=(rand()%41)+10;			
-	for( j =0;j<=4;j++)
-	{
-		printf("%d ",A[j]);
-	}
+	for(j =0;j<=4;j++)
+		printf("%d ",ANS[j]);
 }
 
 void bubble (void)
 {
-	int temp,c,k,l;
-	for( c = 0; c < 5; c++) 
+	int temp,i,j;
+		for( i = 0; i < 5; i++) 
 	{
-        for(  k= c; k < 5; k++) 
+        for( j= i; j < 5; j++) 
 		{
-            if( A[k] < A[c] ) 
+            if( ANS[j] < ANS[i] ) 
 			{
-                temp = A[k];
-                A[k] = A[c];
-                A[c] = temp;
+                temp = ANS[j];
+                ANS[j] = ANS[i];
+                ANS[i] = temp;
             }
         }
     }
-    for( l =0;l<=4;l++)
-	{
-		printf("%d ",A[l]);
-	}	
+    for( i =0;i<=4;i++)
+		printf("%d ",ANS[i]);
 }
+
+
